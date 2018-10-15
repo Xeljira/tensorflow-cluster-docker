@@ -1,0 +1,51 @@
+version: "3"
+services:
+  master: # Container name
+    hostname: master #name of the Container on the network
+    image: xeljira/eisti:tensorflow #docker image
+    ports: #port use
+      - "2222"
+    networks: #name of the network use
+      - tensorflow-network
+    stdin_open: true # -i parameter from docker command
+    tty: true # -t parameter from docker command
+    command: python src/master/create-master.py 2 #commande use to run the server for tensorflow
+    volumes: #volume shared volume-host:volume-conteneur
+      - ./src:/home/dev/project/src # get all scripts because it's the master. The master have all the rigth to run everything he want
+
+  worker-1:
+    hostname: worker1
+    image: xeljira/eisti:tensorflow
+    command: python src/create-worker.py 0
+    volumes:
+      - ./src/worker:/home/dev/project/src #get the script juste for the worker. The worker don't need to have all the project to run.
+    ports:
+      - "2222"
+    networks:
+      - tensorflow-network
+    stdin_open: true
+    tty: true
+    depends_on: # Waitting until the master container are run. The master create the server for tensorflow. If the master conatainer didn't run, you don't need to waiste you time to run worker containers
+      - master
+
+  worker-2:
+    hostname: worker2
+    image: xeljira/eisti:tensorflow
+    command: python src/create-worker.py 1
+    volumes:
+      - ./src/worker:/home/dev/project/src
+    ports:
+      - "2222"
+    networks:
+      - tensorflow-network
+    stdin_open: true
+    tty: true
+    depends_on:
+      - master
+
+networks: #create a network
+  tensorflow-network: # name of the network
+    driver: bridge # diver type REF: https://docs.docker.com/compose/compose-file/#driver-1
+    ipam:
+      config: #configure of the subnet for the cluster
+        - subnet: 192.168.90.0/24

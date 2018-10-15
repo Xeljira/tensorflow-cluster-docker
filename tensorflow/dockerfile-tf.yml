@@ -1,0 +1,43 @@
+FROM ubuntu:16.04
+
+# Pick up some TF dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        curl \
+        git \
+        wget \
+        libfreetype6-dev \
+        libhdf5-serial-dev \
+        libpng12-dev \
+        libzmq3-dev \
+        python-pip \
+        pkg-config \
+        python \
+        python-dev \
+        python-setuptools \
+        rsync \
+        unzip \
+        python-qt4 \
+        vim \
+        nano \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# python package
+RUN pip install --upgrade pip
+RUN pip --no-cache-dir install \
+        Pillow \
+        h5py \
+        tensorflow \
+        ipykernel \
+        keras \
+        numpy \
+        opencv-python \
+        pandas \
+        scipy \
+        sklearn \
+        && \
+    python -m ipykernel.kernelspec
+
+WORKDIR /home/dev/project
