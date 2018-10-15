@@ -2,7 +2,7 @@
 
 In this project, I wanted to build a cluster of container to run a tensorflow application.
 
-<!!!> You need to put the docker-compose file into tensorflow folder 
+<!!!> You need to put the docker-compose file into tensorflow folder <!!!!> 
 
 I choose to split the work between multiple container to simulate a cluster between multiple computer. With this we can see if our tensorflow application work.
 The master folder contain the script to create a the server.
