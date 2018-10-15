@@ -6,7 +6,7 @@ In this project, I wanted to build a cluster of container to run a tensorflow ap
 
 I choose to split the work between multiple container to simulate a cluster between multiple computer. We will see hpow our tensorflow application work.
 
-##Folder directory
+## Folder directory
 
 The src folder get all scripts
 
