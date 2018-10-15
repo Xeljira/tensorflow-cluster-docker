@@ -15,7 +15,7 @@ The worker folder contain the script to link a worker to the cluster
 
 ## Run scripts
 
-In the src folder, we have 2 scripts. The first one is  tensorflow-test. You can test I and see that tensorflow train a neural network on a data-set. The second tensorflow-HPC show how we use tensorflow on a cluster to compute a simple operation. The compute will be shared between multiple node of the cluster.
+In the src folder, we have 2 scripts. The first one is  tensorflow-test. You can test and see that tensorflow train a neural network on a data-set. The second tensorflow-HPC show how we use tensorflow on a cluster to compute a simple operation. The compute will be shared between multiple node of the cluster.
 
 To build the cluster, you need to run:
 
